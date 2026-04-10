@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Share Your Feedback</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Noto+Serif+Devanagari:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #1a1a2e;
+      --paper: #faf8f4;
+      --accent: #e05c2a;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.7;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.5;
+    }
+
+    .nav-bar {
+      width: 100%;
+      max-width: 640px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: flex-start;
+      z-index: 1;
+      position: relative;
+    }
+
+    .back-btn {
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    .back-btn:hover { color: var(--accent); }
+
+    .iframe-container {
+      width: 100%;
+      max-width: 640px;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      z-index: 1;
+      position: relative;
+    }
+
+    iframe {
+      width: 100%;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="nav-bar">
+    <a href="index.html" class="back-btn">← Wapas Jayein</a>
+  </div>
+
+  <div class="iframe-container">
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc7DZABF9cRPZYm5l4jVe_4Ce48EuI2yzmyAeQNnC0woPI3IA/viewform?embedded=true" width="640" height="3018" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+  </div>
+
+</body>
+</html>
