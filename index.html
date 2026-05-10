@@ -52,6 +52,41 @@
       transition: width 0.1s;
     }
 
+    /* ─── LANG TOGGLE ─── */
+    #lang-toggle {
+      position: fixed;
+      top: 16px; right: 20px;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      background: rgba(26,26,46,0.85);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 100px;
+      padding: 4px;
+      gap: 2px;
+    }
+    #lang-toggle button {
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border: none;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: background 0.25s, color 0.25s;
+      background: transparent;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.3px;
+    }
+    #lang-toggle button.active {
+      background: var(--accent);
+      color: #fff;
+    }
+    #lang-toggle button:hover:not(.active) {
+      color: rgba(255,255,255,0.85);
+    }
+
     section { position: relative; z-index: 1; }
     .container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
 
@@ -218,24 +253,47 @@
     /* FADE UP */
     .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* LANG CONTENT */
+    [data-lang] { transition: opacity 0.2s ease; }
+    body.lang-en [data-lang="hi"] { display: none; }
+    body.lang-hi [data-lang="en"] { display: none; }
   </style>
 </head>
-<body>
+<body class="lang-hi">
 
 <div id="progress"></div>
+
+<!-- ─── LANG TOGGLE ─── -->
+<div id="lang-toggle">
+  <button class="active" onclick="setLang('hi')">हिंदी</button>
+  <button onclick="setLang('en')">EN</button>
+</div>
 
 <!-- ─── HERO ─── -->
 <section id="hero">
   <div class="container">
-    <div class="hero-tag">Parents ke liye · Class 8–12</div>
-    <h1 class="hero-headline">
+    <div class="hero-tag" data-lang="hi">Parents ke liye · Class 8–12</div>
+    <div class="hero-tag" data-lang="en">For Parents · Grades 8–12</div>
+
+    <h1 class="hero-headline" data-lang="hi">
       <span class="quote-mark">"</span>Sach sach batao… aapko pata hota hai ki baccha actually padh raha hai?<span class="quote-mark">"</span>
     </h1>
-    <p class="hero-sub">
+    <h1 class="hero-headline" data-lang="en">
+      <span class="quote-mark">"</span>Be honest… do you actually know if your child is studying?<span class="quote-mark">"</span>
+    </h1>
+
+    <p class="hero-sub" data-lang="hi">
       Table pe baithna <em>≠</em> padhna.<br>
       Aur zyaadatar waqt parents guess hi karte rehte hain.
     </p>
-    <div class="scroll-down">Neeche scroll karein ↓</div>
+    <p class="hero-sub" data-lang="en">
+      Sitting at the desk <em>≠</em> studying.<br>
+      And most of the time, parents are just guessing.
+    </p>
+
+    <div class="scroll-down" data-lang="hi">Neeche scroll karein ↓</div>
+    <div class="scroll-down" data-lang="en">Scroll down ↓</div>
   </div>
 </section>
 
@@ -243,16 +301,31 @@
 <section id="whatif">
   <div class="container">
     <div class="section-block fade-up">
-      <div class="section-label">Ek Idea</div>
-      <h2>Hum ek simple idea explore kar rahe hain.</h2>
-      <p>Agar aisa system ho jo bina aapke interfere kiye:</p>
-      <ul class="whatif-list">
+      <div class="section-label" data-lang="hi">Ek Idea</div>
+      <div class="section-label" data-lang="en">One Idea</div>
+
+      <h2 data-lang="hi">Hum ek simple idea explore kar rahe hain.</h2>
+      <h2 data-lang="en">We're exploring a simple idea.</h2>
+
+      <p data-lang="hi">Agar aisa system ho jo bina aapke interfere kiye:</p>
+      <p data-lang="en">What if there was a system that, without any interference from you:</p>
+
+      <ul class="whatif-list" data-lang="hi">
         <li>Bata sake ki baccha table pe hai ya nahi</li>
         <li>Detect kare jab woh distracted ho</li>
         <li>Aapko clearly dikha de ki actual study kitni hui</li>
       </ul>
-      <div class="whatif-question">
+      <ul class="whatif-list" data-lang="en">
+        <li>Could tell you whether your child is actually at the desk</li>
+        <li>Detected when they got distracted</li>
+        <li>Clearly showed you how much real studying happened</li>
+      </ul>
+
+      <div class="whatif-question" data-lang="hi">
         Toh kya <span>yeh useful hoga?</span>
+      </div>
+      <div class="whatif-question" data-lang="en">
+        Would <span>that be useful?</span>
       </div>
     </div>
   </div>
@@ -262,28 +335,38 @@
 <section id="session">
   <div class="container">
     <div class="section-block fade-up">
-      <div class="section-label">Kaise Kaam Karega</div>
-      <h2>Roz ka study session kaise chalega?</h2>
+      <div class="section-label" data-lang="hi">Kaise Kaam Karega</div>
+      <div class="section-label" data-lang="en">How It Works</div>
+
+      <h2 data-lang="hi">Roz ka study session kaise chalega?</h2>
+      <h2 data-lang="en">How would a daily study session work?</h2>
+
       <div class="flow-steps">
         <div class="flow-step">
           <div class="flow-step-num">▶️</div>
           <div class="flow-step-body">
-            <strong>Ek button dabaya — session start</strong>
-            <span>Koi complex setup nahi. Ek tap, aur system active</span>
+            <strong data-lang="hi">Ek button dabaya — session start</strong>
+            <strong data-lang="en">One button pressed — session starts</strong>
+            <span data-lang="hi">Koi complex setup nahi. Ek tap, aur system active</span>
+            <span data-lang="en">No complex setup. One tap, and the system is active</span>
           </div>
         </div>
         <div class="flow-step">
           <div class="flow-step-num">⚠️</div>
           <div class="flow-step-body">
-            <strong>Beech me uthta hai ya focus break hota hai</strong>
-            <span>System detect karta hai → timer automatically pause</span>
+            <strong data-lang="hi">Beech me uthta hai ya focus break hota hai</strong>
+            <strong data-lang="en">They get up or lose focus midway</strong>
+            <span data-lang="hi">System detect karta hai → timer automatically pause</span>
+            <span data-lang="en">System detects it → timer automatically pauses</span>
           </div>
         </div>
         <div class="flow-step highlight">
           <div class="flow-step-num">✅</div>
           <div class="flow-step-body">
-            <strong>Wapas aaya, properly padh raha hai</strong>
-            <span>Tabhi — aur sirf tabhi — study time count hota hai</span>
+            <strong data-lang="hi">Wapas aaya, properly padh raha hai</strong>
+            <strong data-lang="en">They return and are actually studying</strong>
+            <span data-lang="hi">Tabhi — aur sirf tabhi — study time count hota hai</span>
+            <span data-lang="en">Only then — and only then — does the study time count</span>
           </div>
         </div>
       </div>
@@ -295,27 +378,44 @@
 <section id="matters">
   <div class="container">
     <div class="section-block fade-up">
-      <div class="section-label">Kya Badlega</div>
-      <h2>Abhi jo hota hai, aur jo ho sakta hai.</h2>
+      <div class="section-label" data-lang="hi">Kya Badlega</div>
+      <div class="section-label" data-lang="en">What Changes</div>
+
+      <h2 data-lang="hi">Abhi jo hota hai, aur jo ho sakta hai.</h2>
+      <h2 data-lang="en">What happens now, vs. what could happen.</h2>
+
       <div class="compare-grid">
         <div class="compare-col before">
-          <h4>Abhi</h4>
-          <ul>
+          <h4 data-lang="hi">Abhi</h4>
+          <h4 data-lang="en">Right Now</h4>
+          <ul data-lang="hi">
             <li>"Kitna padha?" → guess</li>
             <li>"Focus tha?" → guess</li>
             <li>"Improve ho raha hai?" → guess</li>
           </ul>
+          <ul data-lang="en">
+            <li>"How much did you study?" → guess</li>
+            <li>"Were you focused?" → guess</li>
+            <li>"Are you improving?" → guess</li>
+          </ul>
         </div>
         <div class="compare-col after">
-          <h4>Agar Yeh Ho</h4>
-          <ul>
+          <h4 data-lang="hi">Agar Yeh Ho</h4>
+          <h4 data-lang="en">With This</h4>
+          <ul data-lang="hi">
             <li>Clear numbers</li>
             <li>Clear pattern</li>
             <li>Clear problem areas</li>
           </ul>
+          <ul data-lang="en">
+            <li>Clear numbers</li>
+            <li>Clear patterns</li>
+            <li>Clear problem areas</li>
+          </ul>
         </div>
       </div>
-      <p>Discussion assumptions pe nahi, reality pe hota hai.</p>
+      <p data-lang="hi">Discussion assumptions pe nahi, reality pe hota hai.</p>
+      <p data-lang="en">Conversations happen based on reality, not assumptions.</p>
     </div>
   </div>
 </section>
@@ -323,29 +423,39 @@
 <!-- ─── CLOSING / BRANCHING ─── -->
 <section id="closing">
   <div class="container">
-    <h2>Agar aapko yeh problem real lagti hai...</h2>
-    <p>Aapka honest input kaafi valuable hoga. Decide karein ki aap kya karna chahte hain:</p>
+    <h2 data-lang="hi">Agar aapko yeh problem real lagti hai...</h2>
+    <h2 data-lang="en">If this problem feels real to you...</h2>
+
+    <p data-lang="hi">Aapka honest input kaafi valuable hoga. Decide karein ki aap kya karna chahte hain:</p>
+    <p data-lang="en">Your honest input would be incredibly valuable. Choose what you'd like to do:</p>
 
     <div class="action-grid">
       <a href="form.html" class="action-card primary">
         <div class="ac-icon">📝</div>
-        <div class="ac-title">Apna feedback dein</div>
-        <div class="ac-desc">Sirf 2 minute lagenge</div>
-        <div class="btn-fill">Form Bharein</div>
+        <div class="ac-title" data-lang="hi">Apna feedback dein</div>
+        <div class="ac-title" data-lang="en">Share your feedback</div>
+        <div class="ac-desc" data-lang="hi">Sirf 2 minute lagenge</div>
+        <div class="ac-desc" data-lang="en">Takes only 2 minutes</div>
+        <div class="btn-fill" data-lang="hi">Form Bharein</div>
+        <div class="btn-fill" data-lang="en">Fill the Form</div>
       </a>
       
       <a href="product.html" class="action-card">
         <div class="ac-icon">🔍</div>
-        <div class="ac-title">Poori details padhein</div>
-        <div class="ac-desc">Features aur privacy ke baare me</div>
-        <div class="btn-outline">Details Dekhein</div>
+        <div class="ac-title" data-lang="hi">Poori details padhein</div>
+        <div class="ac-title" data-lang="en">Read the full details</div>
+        <div class="ac-desc" data-lang="hi">Features aur privacy ke baare me</div>
+        <div class="ac-desc" data-lang="en">About features and privacy</div>
+        <div class="btn-outline" data-lang="hi">Details Dekhein</div>
+        <div class="btn-outline" data-lang="en">See Details</div>
       </a>
     </div>
   </div>
 </section>
 
 <footer>
-  <p>© 2026 · Yeh sirf ek idea validation page hai. Abhi koi product nahi hai.</p>
+  <p data-lang="hi">© 2026 · Yeh sirf ek idea validation page hai. Abhi koi product nahi hai.</p>
+  <p data-lang="en">© 2026 · This is only an idea validation page. No product exists yet.</p>
 </footer>
 
 <script>
@@ -359,6 +469,19 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
   }, { threshold: 0.12 });
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  function setLang(lang) {
+    document.body.className = 'lang-' + lang;
+    document.querySelectorAll('#lang-toggle button').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent.trim() === (lang === 'hi' ? 'हिंदी' : 'EN'));
+    });
+    document.documentElement.lang = lang;
+    localStorage.setItem('preferred-lang', lang);
+  }
+
+  // Restore preference
+  const saved = localStorage.getItem('preferred-lang');
+  if (saved) setLang(saved);
 </script>
 </body>
 </html>
