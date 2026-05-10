@@ -32,7 +32,6 @@
       overflow-x: hidden;
     }
 
-    /* ─── NOISE TEXTURE OVERLAY ─── */
     body::before {
       content: '';
       position: fixed;
@@ -43,7 +42,6 @@
       opacity: 0.5;
     }
 
-    /* ─── PROGRESS BAR ─── */
     #progress {
       position: fixed;
       top: 0; left: 0;
@@ -54,17 +52,47 @@
       transition: width 0.1s;
     }
 
-    /* ─── SECTIONS ─── */
-    section {
-      position: relative;
-      z-index: 1;
+    /* ─── LANG TOGGLE ─── */
+    #lang-toggle {
+      position: fixed;
+      top: 16px; right: 20px;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      background: rgba(26,26,46,0.85);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 100px;
+      padding: 4px;
+      gap: 2px;
+    }
+    #lang-toggle button {
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border: none;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: background 0.25s, color 0.25s;
+      background: transparent;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.3px;
+    }
+    #lang-toggle button.active {
+      background: var(--accent);
+      color: #fff;
+    }
+    #lang-toggle button:hover:not(.active) {
+      color: rgba(255,255,255,0.85);
     }
 
-    .container {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
+    /* LANG CONTENT */
+    body.lang-en [data-lang="hi"] { display: none; }
+    body.lang-hi [data-lang="en"] { display: none; }
+
+    section { position: relative; z-index: 1; }
+    .container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
 
     /* ─── HERO ─── */
     #hero {
@@ -76,7 +104,6 @@
       padding: 80px 0 60px;
       overflow: hidden;
     }
-
     #hero::after {
       content: '';
       position: absolute;
@@ -85,334 +112,129 @@
       background: var(--paper);
       clip-path: ellipse(55% 100% at 50% 100%);
     }
-
     .hero-tag {
       display: inline-block;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      color: var(--accent-warm);
-      background: rgba(244,163,84,0.12);
-      border: 1px solid rgba(244,163,84,0.3);
-      padding: 6px 14px;
-      border-radius: 100px;
-      margin-bottom: 36px;
+      font-size: 11px; font-weight: 600; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--accent-warm);
+      background: rgba(244,163,84,0.12); border: 1px solid rgba(244,163,84,0.3);
+      padding: 6px 14px; border-radius: 100px; margin-bottom: 36px;
     }
-
     .hero-headline {
       font-family: 'Noto Serif Devanagari', serif;
       font-size: clamp(26px, 5vw, 42px);
-      font-weight: 700;
-      line-height: 1.4;
-      color: #fff;
-      margin-bottom: 20px;
+      font-weight: 700; line-height: 1.4; color: #fff; margin-bottom: 20px;
     }
-
-    .hero-headline .quote-mark {
-      color: var(--accent-warm);
-      font-size: 1.3em;
-      line-height: 0;
-      vertical-align: -0.2em;
-    }
-
-    .hero-sub {
-      font-size: 18px;
-      color: rgba(255,255,255,0.65);
-      margin-bottom: 48px;
-      max-width: 520px;
-    }
-
-    .hero-sub em {
-      color: var(--accent-warm);
-      font-style: normal;
-      font-weight: 600;
-    }
-
+    .hero-headline .quote-mark { color: var(--accent-warm); font-size: 1.3em; line-height: 0; vertical-align: -0.2em; }
+    .hero-sub { font-size: 18px; color: rgba(255,255,255,0.65); margin-bottom: 48px; max-width: 520px; }
+    .hero-sub em { color: var(--accent-warm); font-style: normal; font-weight: 600; }
     .cta-group { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
-
     .cta-btn {
-      display: inline-block;
-      background: var(--accent);
-      color: #fff;
-      font-family: 'Poppins', sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-      padding: 16px 36px;
-      border-radius: 6px;
-      text-decoration: none;
-      letter-spacing: 0.3px;
+      display: inline-block; background: var(--accent); color: #fff;
+      font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 700;
+      padding: 16px 36px; border-radius: 6px; text-decoration: none; letter-spacing: 0.3px;
       transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
       box-shadow: 0 4px 20px rgba(224,92,42,0.4);
     }
-    .cta-btn:hover {
-      background: #c94d1e;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(224,92,42,0.5);
-    }
-
-    .cta-note {
-      font-size: 12px;
-      color: rgba(255,255,255,0.45);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
+    .cta-btn:hover { background: #c94d1e; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(224,92,42,0.5); }
+    .cta-note { font-size: 12px; color: rgba(255,255,255,0.45); display: flex; align-items: center; gap: 6px; }
     .cta-note::before { content: '⏱'; }
 
     /* ─── SECTION SHARED ─── */
-    .section-block {
-      padding: 80px 0;
-      border-bottom: 1px solid var(--line);
-    }
+    .section-block { padding: 80px 0; border-bottom: 1px solid var(--line); }
     .section-block:last-of-type { border-bottom: none; }
-
     .section-label {
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      font-size: 13px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
     }
-    .section-label::after {
-      content: '';
-      flex: 1;
-      max-width: 40px;
-      height: 1px;
-      background: var(--accent);
-      opacity: 0.4;
-    }
-
+    .section-label::after { content: ''; flex: 1; max-width: 40px; height: 1px; background: var(--accent); opacity: 0.4; }
     h2 {
       font-family: 'Noto Serif Devanagari', serif;
-      font-size: clamp(22px, 4vw, 32px);
-      font-weight: 700;
-      line-height: 1.4;
-      color: var(--ink);
-      margin-bottom: 24px;
+      font-size: clamp(22px, 4vw, 32px); font-weight: 700; line-height: 1.4;
+      color: var(--ink); margin-bottom: 24px;
     }
-
     p { color: var(--ink-soft); font-size: 17px; margin-bottom: 16px; }
     p:last-child { margin-bottom: 0; }
 
     /* ─── REALITY CHECK ─── */
-    .reality-intro {
-      font-size: 16px;
-      color: var(--ink-soft);
-      margin-bottom: 28px;
-    }
-
-    .checklist {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 28px;
-    }
+    .checklist { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
     .checklist li {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      font-size: 15px;
-      color: var(--ink-soft);
-      background: var(--cream);
-      padding: 14px 18px;
-      border-radius: 8px;
-      border-left: 3px solid var(--accent-warm);
+      display: flex; align-items: flex-start; gap: 14px; font-size: 15px;
+      color: var(--ink-soft); background: var(--cream); padding: 14px 18px;
+      border-radius: 8px; border-left: 3px solid var(--accent-warm);
     }
     .checklist li .icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
-
     .quote-callout {
-      font-family: 'Noto Serif Devanagari', serif;
-      font-size: 17px;
-      color: var(--muted);
-      border-left: 3px solid var(--line);
-      padding: 12px 20px;
-      margin: 20px 0;
-      font-style: italic;
+      font-family: 'Noto Serif Devanagari', serif; font-size: 17px; color: var(--muted);
+      border-left: 3px solid var(--line); padding: 12px 20px; margin: 20px 0; font-style: italic;
     }
     .quote-callout strong { color: var(--ink); font-style: normal; }
 
     /* ─── PROBLEM CARD ─── */
     .problem-highlight {
-      background: var(--ink);
-      color: #fff;
-      border-radius: 12px;
-      padding: 36px 32px;
-      margin: 28px 0;
+      background: var(--ink); color: #fff; border-radius: 12px; padding: 36px 32px; margin: 28px 0;
     }
     .problem-highlight p { color: rgba(255,255,255,0.75); font-size: 16px; }
     .problem-highlight p strong { color: var(--accent-warm); }
     .problem-highlight .big-line {
       font-family: 'Noto Serif Devanagari', serif;
-      font-size: clamp(18px, 3.5vw, 24px);
-      color: #fff;
-      font-weight: 700;
-      margin-top: 20px;
-      margin-bottom: 0;
-      line-height: 1.5;
+      font-size: clamp(18px, 3.5vw, 24px); color: #fff; font-weight: 700;
+      margin-top: 20px; margin-bottom: 0; line-height: 1.5;
     }
 
     /* ─── PARENT PAIN ─── */
-    .pain-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin: 24px 0;
-    }
+    .pain-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 24px 0; }
     @media (max-width: 480px) { .pain-grid { grid-template-columns: 1fr; } }
-
     .pain-card {
-      background: var(--cream);
-      border-radius: 10px;
-      padding: 18px;
-      font-size: 14px;
-      color: var(--ink-soft);
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
+      background: var(--cream); border-radius: 10px; padding: 18px; font-size: 14px;
+      color: var(--ink-soft); display: flex; gap: 10px; align-items: flex-start;
     }
     .pain-card .pain-icon { font-size: 20px; flex-shrink: 0; }
-
     .pain-note {
-      font-weight: 700;
-      color: var(--ink);
-      font-size: 15px;
-      margin-top: 20px;
-      padding: 14px 18px;
-      background: var(--accent-light);
-      border-radius: 8px;
-      border-left: 4px solid var(--accent);
+      font-weight: 700; color: var(--ink); font-size: 15px; margin-top: 20px;
+      padding: 14px 18px; background: var(--accent-light); border-radius: 8px; border-left: 4px solid var(--accent);
     }
 
     /* ─── WHAT IF ─── */
-    .whatif-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin: 20px 0;
-    }
-    .whatif-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      font-size: 15px;
-      color: var(--ink-soft);
-    }
-    .whatif-list li::before {
-      content: '→';
-      color: var(--accent);
-      font-weight: 700;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-
+    .whatif-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 20px 0; }
+    .whatif-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: var(--ink-soft); }
+    .whatif-list li::before { content: '→'; color: var(--accent); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
     .whatif-question {
       font-family: 'Noto Serif Devanagari', serif;
-      font-size: clamp(18px, 3vw, 22px);
-      font-weight: 700;
-      color: var(--ink);
-      margin-top: 28px;
-      padding: 22px 24px;
-      border: 2px solid var(--ink);
-      border-radius: 10px;
-      line-height: 1.5;
+      font-size: clamp(18px, 3vw, 22px); font-weight: 700; color: var(--ink); margin-top: 28px;
+      padding: 22px 24px; border: 2px solid var(--ink); border-radius: 10px; line-height: 1.5;
     }
     .whatif-question span { color: var(--accent); }
 
     /* ─── VISUALIZATION ─── */
     .desk-viz {
       background: linear-gradient(135deg, #f8f5f0 0%, #eee8dc 100%);
-      border-radius: 16px;
-      padding: 40px 32px;
-      margin: 28px 0;
-      border: 1px solid var(--line);
-      position: relative;
-      overflow: hidden;
+      border-radius: 16px; padding: 40px 32px; margin: 28px 0;
+      border: 1px solid var(--line); position: relative; overflow: hidden;
     }
-    .desk-viz::before {
-      content: '📚';
-      position: absolute;
-      top: -10px; right: 20px;
-      font-size: 80px;
-      opacity: 0.07;
-    }
-
-    .desk-story {
-      font-size: 15px;
-      color: var(--ink-soft);
-      margin-bottom: 24px;
-      line-height: 1.8;
-    }
-
-    .detect-items {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin: 18px 0 24px;
-    }
-    .detect-items li {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 14px;
-      color: var(--ink-soft);
-    }
+    .desk-viz::before { content: '📚'; position: absolute; top: -10px; right: 20px; font-size: 80px; opacity: 0.07; }
+    .desk-story { font-size: 15px; color: var(--ink-soft); margin-bottom: 24px; line-height: 1.8; }
+    .detect-items { list-style: none; display: flex; flex-direction: column; gap: 8px; margin: 18px 0 24px; }
+    .detect-items li { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--ink-soft); }
     .detect-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--green);
-      flex-shrink: 0;
-      animation: pulse 2s infinite;
+      width: 8px; height: 8px; border-radius: 50%; background: var(--green);
+      flex-shrink: 0; animation: pulse 2s infinite;
     }
-    @keyframes pulse {
-      0%,100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(1.3); }
-    }
-
+    @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.3); } }
     .result-card {
-      background: var(--ink);
-      color: #fff;
-      border-radius: 10px;
-      padding: 20px 24px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
+      background: var(--ink); color: #fff; border-radius: 10px; padding: 20px 24px;
+      display: flex; align-items: center; gap: 16px;
     }
     .result-card .result-icon { font-size: 28px; flex-shrink: 0; }
     .result-card .result-text { font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 4px; }
-    .result-card .result-value {
-      font-family: 'Noto Serif Devanagari', serif;
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--accent-warm);
-    }
+    .result-card .result-value { font-family: 'Noto Serif Devanagari', serif; font-size: 18px; font-weight: 700; color: var(--accent-warm); }
 
     /* ─── WHY MATTERS ─── */
-    .compare-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin: 24px 0;
-    }
+    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
     @media (max-width: 480px) { .compare-grid { grid-template-columns: 1fr; } }
-
     .compare-col { border-radius: 10px; padding: 20px; }
     .compare-col.before { background: #fff0eb; border: 1px solid #f5c4b0; }
     .compare-col.after { background: var(--green-light); border: 1px solid #a8d5c4; }
-    .compare-col h4 {
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
+    .compare-col h4 { font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 14px; }
     .compare-col.before h4 { color: var(--accent); }
     .compare-col.after h4 { color: var(--green); }
     .compare-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
@@ -421,251 +243,80 @@
     .compare-col.after ul li::before { content: '✓  '; color: var(--green); font-weight: 700; }
 
     /* ─── CLARITY ─── */
-    .clarity-box {
-      background: var(--cream);
-      border: 2px dashed var(--line);
-      border-radius: 12px;
-      padding: 32px;
-      text-align: center;
-    }
+    .clarity-box { background: var(--cream); border: 2px dashed var(--line); border-radius: 12px; padding: 32px; text-align: center; }
     .clarity-box .clarity-icon { font-size: 40px; margin-bottom: 14px; }
-    .clarity-box h3 {
-      font-family: 'Noto Serif Devanagari', serif;
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--ink);
-      margin-bottom: 12px;
-    }
+    .clarity-box h3 { font-family: 'Noto Serif Devanagari', serif; font-size: 20px; font-weight: 700; color: var(--ink); margin-bottom: 12px; }
     .clarity-box p { color: var(--muted); font-size: 14.5px; }
 
     /* ─── TRUST / CAMERA ─── */
-    .trust-diagram {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0;
-      margin: 32px 0;
-      flex-wrap: wrap;
-    }
-    .trust-node {
-      text-align: center;
-      padding: 20px 16px;
-    }
-    .trust-node .ticon {
-      font-size: 32px;
-      display: block;
-      margin-bottom: 8px;
-    }
-    .trust-node .tlabel {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--ink);
-    }
-    .trust-node .tsub {
-      font-size: 11px;
-      color: var(--muted);
-      margin-top: 3px;
-    }
-    .trust-arrow {
-      font-size: 22px;
-      color: var(--line);
-      padding: 0 4px;
-      align-self: center;
-    }
+    .trust-diagram { display: flex; align-items: center; justify-content: center; gap: 0; margin: 32px 0; flex-wrap: wrap; }
+    .trust-node { text-align: center; padding: 20px 16px; }
+    .trust-node .ticon { font-size: 32px; display: block; margin-bottom: 8px; }
+    .trust-node .tlabel { font-size: 12px; font-weight: 600; color: var(--ink); }
+    .trust-node .tsub { font-size: 11px; color: var(--muted); margin-top: 3px; }
+    .trust-arrow { font-size: 22px; color: var(--line); padding: 0 4px; align-self: center; }
     .trust-node.deny { background: var(--green-light); border-radius: 10px; border: 1px solid #a8d5c4; }
     .trust-node.deny .ticon { font-size: 28px; }
     .trust-node.deny .tlabel { color: var(--green); }
-
-    .trust-note {
-      text-align: center;
-      font-size: 13px;
-      color: var(--muted);
-      margin-top: 8px;
-      font-style: italic;
-    }
+    .trust-note { text-align: center; font-size: 13px; color: var(--muted); margin-top: 8px; font-style: italic; }
 
     /* ─── CLOSING ─── */
     #closing {
-      background: var(--ink);
-      color: #fff;
-      padding: 100px 0 80px;
-      position: relative;
-      overflow: hidden;
+      background: var(--ink); color: #fff; padding: 100px 0 80px; position: relative; overflow: hidden;
     }
-    #closing::before {
-      content: '';
-      position: absolute;
-      top: -60px; left: 0; right: 0;
-      height: 60px;
-      background: var(--paper);
-      clip-path: ellipse(55% 100% at 50% 0%);
-    }
+    #closing::before { content: ''; position: absolute; top: -60px; left: 0; right: 0; height: 60px; background: var(--paper); clip-path: ellipse(55% 100% at 50% 0%); }
     #closing .container { text-align: center; }
-    #closing h2 {
-      font-family: 'Noto Serif Devanagari', serif;
-      color: #fff;
-      font-size: clamp(22px, 4vw, 32px);
-      margin-bottom: 16px;
-    }
+    #closing h2 { font-family: 'Noto Serif Devanagari', serif; color: #fff; font-size: clamp(22px, 4vw, 32px); margin-bottom: 16px; }
     #closing p { color: rgba(255,255,255,0.6); font-size: 15px; }
-
-    .cta-final-group {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 14px;
-      margin-top: 40px;
-    }
+    .cta-final-group { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 40px; }
     .cta-btn-large {
-      display: inline-block;
-      background: var(--accent);
-      color: #fff;
-      font-family: 'Poppins', sans-serif;
-      font-size: 16px;
-      font-weight: 700;
-      padding: 18px 44px;
-      border-radius: 6px;
-      text-decoration: none;
-      letter-spacing: 0.3px;
+      display: inline-block; background: var(--accent); color: #fff;
+      font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 700;
+      padding: 18px 44px; border-radius: 6px; text-decoration: none; letter-spacing: 0.3px;
       transition: transform 0.2s, box-shadow 0.2s;
       box-shadow: 0 4px 24px rgba(224,92,42,0.45);
     }
-    .cta-btn-large:hover {
-      background: #c94d1e;
-      transform: translateY(-3px);
-      box-shadow: 0 10px 32px rgba(224,92,42,0.55);
-    }
+    .cta-btn-large:hover { background: #c94d1e; transform: translateY(-3px); box-shadow: 0 10px 32px rgba(224,92,42,0.55); }
     .cta-final-note { font-size: 13px; color: rgba(255,255,255,0.4); font-style: italic; }
 
     /* ─── FOOTER ─── */
-    footer {
-      text-align: center;
-      padding: 24px;
-      font-size: 12px;
-      color: var(--muted);
-      border-top: 1px solid var(--line);
-    }
+    footer { text-align: center; padding: 24px; font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); }
 
     /* ─── SESSION FLOW ─── */
     .session-intro { font-size: 15.5px; color: var(--ink-soft); margin-bottom: 28px; }
-
-    .flow-steps {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      margin: 28px 0;
-      position: relative;
-    }
+    .flow-steps { display: flex; flex-direction: column; gap: 0; margin: 28px 0; position: relative; }
     .flow-steps::before {
-      content: '';
-      position: absolute;
-      left: 22px; top: 24px; bottom: 24px;
-      width: 2px;
-      background: linear-gradient(to bottom, var(--accent-warm), var(--green));
-      opacity: 0.3;
+      content: ''; position: absolute; left: 22px; top: 24px; bottom: 24px; width: 2px;
+      background: linear-gradient(to bottom, var(--accent-warm), var(--green)); opacity: 0.3;
     }
-    .flow-step {
-      display: flex;
-      gap: 18px;
-      align-items: flex-start;
-      padding: 14px 0;
-    }
+    .flow-step { display: flex; gap: 18px; align-items: flex-start; padding: 14px 0; }
     .flow-step-num {
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      background: var(--cream);
-      border: 2px solid var(--line);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 18px;
-      flex-shrink: 0;
-      position: relative;
-      z-index: 1;
+      width: 44px; height: 44px; border-radius: 50%; background: var(--cream);
+      border: 2px solid var(--line); display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0; position: relative; z-index: 1;
     }
     .flow-step-body { padding-top: 8px; }
     .flow-step-body strong { font-size: 14px; font-weight: 700; color: var(--ink); display: block; margin-bottom: 2px; }
     .flow-step-body span { font-size: 13.5px; color: var(--muted); }
-    .flow-step.highlight .flow-step-num {
-      background: var(--accent-light);
-      border-color: var(--accent);
-    }
-
-    .session-key-point {
-      background: var(--ink);
-      color: #fff;
-      border-radius: 10px;
-      padding: 24px 28px;
-      margin-top: 24px;
-    }
-    .session-key-point .skp-label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--accent-warm);
-      margin-bottom: 10px;
-    }
-    .session-key-point p {
-      color: rgba(255,255,255,0.7);
-      font-size: 14.5px;
-      margin-bottom: 8px;
-    }
-    .session-key-point .skp-big {
-      font-family: 'Noto Serif Devanagari', serif;
-      font-size: clamp(16px, 3vw, 20px);
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 0;
-      line-height: 1.5;
-    }
+    .flow-step.highlight .flow-step-num { background: var(--accent-light); border-color: var(--accent); }
+    .session-key-point { background: var(--ink); color: #fff; border-radius: 10px; padding: 24px 28px; margin-top: 24px; }
+    .session-key-point .skp-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-warm); margin-bottom: 10px; }
+    .session-key-point p { color: rgba(255,255,255,0.7); font-size: 14.5px; margin-bottom: 8px; }
+    .session-key-point .skp-big { font-family: 'Noto Serif Devanagari', serif; font-size: clamp(16px, 3vw, 20px); font-weight: 700; color: #fff; margin-bottom: 0; line-height: 1.5; }
     .skp-strike { text-decoration: line-through; color: rgba(255,255,255,0.35); }
     .skp-ok { color: var(--accent-warm); }
 
     /* ─── APP BLOCKING ─── */
-    .phone-callout {
-      font-family: 'Noto Serif Devanagari', serif;
-      font-size: clamp(26px, 5vw, 40px);
-      font-weight: 900;
-      color: var(--ink);
-      margin: 20px 0 24px;
-      letter-spacing: -1px;
-    }
-
-    .block-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin: 20px 0;
-    }
-    .block-list li {
-      display: flex; align-items: center; gap: 12px;
-      font-size: 14.5px; color: var(--ink-soft);
-      background: var(--cream); padding: 12px 16px;
-      border-radius: 8px;
-    }
+    .phone-callout { font-family: 'Noto Serif Devanagari', serif; font-size: clamp(26px, 5vw, 40px); font-weight: 900; color: var(--ink); margin: 20px 0 24px; letter-spacing: -1px; }
+    .block-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 20px 0; }
+    .block-list li { display: flex; align-items: center; gap: 12px; font-size: 14.5px; color: var(--ink-soft); background: var(--cream); padding: 12px 16px; border-radius: 8px; }
     .block-list li .bl-icon { font-size: 18px; flex-shrink: 0; }
     .block-list li.allowed { background: var(--green-light); border-left: 3px solid var(--green); }
     .block-list li.blocked { background: #fff0eb; border-left: 3px solid var(--accent); }
-
-    .twist-box {
-      border: 2px solid var(--ink);
-      border-radius: 10px;
-      padding: 24px 28px;
-      margin: 24px 0;
-    }
-    .twist-box .twist-label {
-      font-size: 10px; font-weight: 700; letter-spacing: 2px;
-      text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
-    }
-    .twist-box h3 {
-      font-family: 'Noto Serif Devanagari', serif;
-      font-size: clamp(17px, 3vw, 22px);
-      font-weight: 700; color: var(--ink);
-      margin-bottom: 16px; line-height: 1.4;
-    }
-    .unlock-compare {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;
-    }
+    .twist-box { border: 2px solid var(--ink); border-radius: 10px; padding: 24px 28px; margin: 24px 0; }
+    .twist-box .twist-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    .twist-box h3 { font-family: 'Noto Serif Devanagari', serif; font-size: clamp(17px, 3vw, 22px); font-weight: 700; color: var(--ink); margin-bottom: 16px; line-height: 1.4; }
+    .unlock-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
     @media (max-width: 480px) { .unlock-compare { grid-template-columns: 1fr; } }
     .unlock-card { padding: 16px; border-radius: 8px; text-align: center; }
     .unlock-card.bad { background: #fff0eb; border: 1px solid #f5c4b0; }
@@ -675,43 +326,20 @@
     .unlock-card.good .uc-type { color: var(--green); }
     .unlock-card .uc-desc { font-size: 13px; color: var(--ink-soft); margin-bottom: 8px; }
     .unlock-card .uc-verdict { font-size: 18px; }
-
-    .reward-note {
-      font-family: 'Noto Serif Devanagari', serif;
-      font-size: 16px; font-weight: 600;
-      color: var(--ink); padding: 18px 20px;
-      background: var(--accent-light); border-radius: 8px;
-      border-left: 4px solid var(--accent); margin-top: 20px;
-    }
+    .reward-note { font-family: 'Noto Serif Devanagari', serif; font-size: 16px; font-weight: 600; color: var(--ink); padding: 18px 20px; background: var(--accent-light); border-radius: 8px; border-left: 4px solid var(--accent); margin-top: 20px; }
 
     /* ─── REAL-TIME VS REPORT ─── */
-    .dual-panel {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 16px; margin: 28px 0;
-    }
+    .dual-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0; }
     @media (max-width: 520px) { .dual-panel { grid-template-columns: 1fr; } }
-
-    .panel {
-      border-radius: 12px; padding: 24px;
-      display: flex; flex-direction: column; gap: 12px;
-    }
+    .panel { border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 12px; }
     .panel.hardware { background: var(--ink); }
     .panel.parent-app { background: var(--cream); border: 1px solid var(--line); }
-
-    .panel-label {
-      font-size: 9px; font-weight: 700; letter-spacing: 2.5px;
-      text-transform: uppercase; margin-bottom: 4px;
-    }
+    .panel-label { font-size: 9px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 4px; }
     .panel.hardware .panel-label { color: var(--accent-warm); }
     .panel.parent-app .panel-label { color: var(--accent); }
-
-    .panel-title {
-      font-family: 'Noto Serif Devanagari', serif;
-      font-size: 16px; font-weight: 700; line-height: 1.4;
-    }
+    .panel-title { font-family: 'Noto Serif Devanagari', serif; font-size: 16px; font-weight: 700; line-height: 1.4; }
     .panel.hardware .panel-title { color: #fff; }
     .panel.parent-app .panel-title { color: var(--ink); }
-
     .panel-items { list-style: none; display: flex; flex-direction: column; gap: 8px; }
     .panel-items li { font-size: 13px; display: flex; align-items: flex-start; gap: 8px; }
     .panel.hardware .panel-items li { color: rgba(255,255,255,0.65); }
@@ -719,74 +347,62 @@
     .panel-items li::before { content: '·'; font-weight: 900; flex-shrink: 0; margin-top: 1px; }
     .panel.hardware .panel-items li::before { color: var(--accent-warm); }
     .panel.parent-app .panel-items li::before { color: var(--accent); }
+    .panel-for { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: auto; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.1); }
+    .panel.parent-app .panel-for { color: var(--muted); border-top-color: var(--line); }
 
-    .panel-for {
-      font-size: 11px; color: rgba(255,255,255,0.4); margin-top: auto;
-      padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.1);
-    }
-    .panel.parent-app .panel-for {
-      color: var(--muted); border-top-color: var(--line);
-    }
-
-    .report-mock {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 20px 24px;
-      margin-top: 20px;
-      font-family: 'Poppins', monospace;
-    }
-    .report-mock .rm-date {
-      font-size: 11px; font-weight: 700; letter-spacing: 1px;
-      text-transform: uppercase; color: var(--muted); margin-bottom: 16px;
-    }
-    .rm-row {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 10px 0; border-bottom: 1px solid var(--line);
-      font-size: 14px;
-    }
+    .report-mock { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 20px 24px; margin-top: 20px; }
+    .report-mock .rm-date { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+    .rm-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
     .rm-row:last-child { border-bottom: none; }
     .rm-row .rm-key { color: var(--muted); font-size: 13px; }
     .rm-row .rm-val { font-weight: 700; color: var(--ink); }
     .rm-row .rm-val.good { color: var(--green); }
     .rm-row .rm-val.warn { color: var(--accent); }
-
-    .format-note {
-      font-family: 'Noto Serif Devanagari', serif;
-      font-size: 16px; font-weight: 600; color: var(--ink-soft);
-      text-align: center; margin-top: 28px; padding: 20px 24px;
-      background: var(--cream); border-radius: 10px;
-      line-height: 1.6;
-    }
+    .format-note { font-family: 'Noto Serif Devanagari', serif; font-size: 16px; font-weight: 600; color: var(--ink-soft); text-align: center; margin-top: 28px; padding: 20px 24px; background: var(--cream); border-radius: 10px; line-height: 1.6; }
     .format-note strong { color: var(--ink); }
 
-    /* ─── FADE IN ANIMATION ─── */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
+    /* ─── FADE IN ─── */
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
   </style>
 </head>
-<body>
+<body class="lang-hi">
 
 <div id="progress"></div>
+
+<!-- ─── LANG TOGGLE ─── -->
+<div id="lang-toggle">
+  <button class="active" onclick="setLang('hi')">हिंदी</button>
+  <button onclick="setLang('en')">EN</button>
+</div>
 
 <!-- ─── HERO ─── -->
 <section id="hero">
   <div class="container">
-    <div class="hero-tag">Parents ke liye · Class 8–12</div>
-    <h1 class="hero-headline">
+    <div class="hero-tag" data-lang="hi">Parents ke liye · Class 8–12</div>
+    <div class="hero-tag" data-lang="en">For Parents · Grades 8–12</div>
+
+    <h1 class="hero-headline" data-lang="hi">
       <span class="quote-mark">"</span>Sach sach batao… aapko pata hota hai ki baccha actually padh raha hai?<span class="quote-mark">"</span>
     </h1>
-    <p class="hero-sub">
+    <h1 class="hero-headline" data-lang="en">
+      <span class="quote-mark">"</span>Be honest… do you actually know if your child is studying?<span class="quote-mark">"</span>
+    </h1>
+
+    <p class="hero-sub" data-lang="hi">
       Table pe baithna <em>≠</em> padhna.<br>
       Aur zyaadatar waqt parents guess hi karte rehte hain.
     </p>
+    <p class="hero-sub" data-lang="en">
+      Sitting at the desk <em>≠</em> studying.<br>
+      And most of the time, parents are just guessing.
+    </p>
+
     <div class="cta-group">
-      <a href="form.html" class="cta-btn">Apna experience share karein →</a>
-      <span class="cta-note">2 minute ka honest input chahiye — bas samajhna hai problem real hai ya nahi.</span>
+      <a href="form.html" class="cta-btn" data-lang="hi">Apna experience share karein →</a>
+      <a href="form.html" class="cta-btn" data-lang="en">Share your experience →</a>
+      <span class="cta-note" data-lang="hi">2 minute ka honest input chahiye — bas samajhna hai problem real hai ya nahi.</span>
+      <span class="cta-note" data-lang="en">Just 2 minutes of honest input — we want to know if this problem is real.</span>
     </div>
   </div>
 </section>
@@ -795,16 +411,30 @@
 <section id="reality">
   <div class="container">
     <div class="section-block fade-up">
-      <div class="section-label">Reality Check</div>
-      <h2>Agar aapka baccha Class 8–12 me hai, toh yeh familiar lagega:</h2>
-      <ul class="checklist">
+      <div class="section-label" data-lang="hi">Reality Check</div>
+      <div class="section-label" data-lang="en">Reality Check</div>
+
+      <h2 data-lang="hi">Agar aapka baccha Class 8–12 me hai, toh yeh familiar lagega:</h2>
+      <h2 data-lang="en">If your child is in Grades 8–12, this will feel familiar:</h2>
+
+      <ul class="checklist" data-lang="hi">
         <li><span class="icon">⏰</span> 3–4 ghante table pe baithta hai — roz, bina miss kiye</li>
         <li><span class="icon">📱</span> Beech beech me phone "check" karta hai — bas ek second ke liye</li>
         <li><span class="icon">📖</span> Kabhi kabhi bas book khuli hoti hai, dimaag kahin aur hota hai</li>
       </ul>
-      <div class="quote-callout">
+      <ul class="checklist" data-lang="en">
+        <li><span class="icon">⏰</span> Sits at the desk for 3–4 hours — every day, without fail</li>
+        <li><span class="icon">📱</span> Checks their phone "just for a second" every now and then</li>
+        <li><span class="icon">📖</span> Sometimes the book is open, but the mind is somewhere else</li>
+      </ul>
+
+      <div class="quote-callout" data-lang="hi">
         Aur end me bolta hai: <strong>"Haan padh liya."</strong><br>
         Aapko maanna padta hai.
+      </div>
+      <div class="quote-callout" data-lang="en">
+        And at the end they say: <strong>"Yeah, I studied."</strong><br>
+        And you have no choice but to believe them.
       </div>
     </div>
   </div>
@@ -814,12 +444,20 @@
 <section id="problem">
   <div class="container">
     <div class="section-block fade-up">
-      <div class="section-label">Asli Samasya</div>
-      <h2>Problem yeh nahi hai ki bacche padhna nahi chahte.</h2>
-      <p>Motivation theek hai. Intention bhi hai. Problem yeh hai ki <strong>padhne ke time pe padhai hoti hi nahi.</strong></p>
+      <div class="section-label" data-lang="hi">Asli Samasya</div>
+      <div class="section-label" data-lang="en">The Real Problem</div>
+
+      <h2 data-lang="hi">Problem yeh nahi hai ki bacche padhna nahi chahte.</h2>
+      <h2 data-lang="en">The problem isn't that kids don't want to study.</h2>
+
+      <p data-lang="hi">Motivation theek hai. Intention bhi hai. Problem yeh hai ki <strong>padhne ke time pe padhai hoti hi nahi.</strong></p>
+      <p data-lang="en">The motivation is there. The intention is there. The problem is that <strong>actual studying doesn't happen during study time.</strong></p>
+
       <div class="problem-highlight">
-        <p>Distraction <strong>silent</strong> hota hai. Koi shor nahi. Koi fight nahi. Parent ko dikhta bhi nahi.</p>
-        <p class="big-line">Isliye: Effort aur result kabhi match nahi karte.</p>
+        <p data-lang="hi">Distraction <strong>silent</strong> hota hai. Koi shor nahi. Koi fight nahi. Parent ko dikhta bhi nahi.</p>
+        <p data-lang="en">Distraction is <strong>silent</strong>. No noise. No conflict. Parents can't even see it happening.</p>
+        <p class="big-line" data-lang="hi">Isliye: Effort aur result kabhi match nahi karte.</p>
+        <p class="big-line" data-lang="en">That's why: Effort and results never add up.</p>
       </div>
     </div>
   </div>
@@ -829,16 +467,28 @@
 <section id="parents">
   <div class="container">
     <div class="section-block fade-up">
-      <div class="section-label">Parent ka Darr</div>
-      <h2>Aap har waqt paas nahi baith sakte.</h2>
-      <p>Aur honestly — koi bhi nahi baith sakta. Life chalti rehti hai.</p>
+      <div class="section-label" data-lang="hi">Parent ka Darr</div>
+      <div class="section-label" data-lang="en">The Parent's Dilemma</div>
+
+      <h2 data-lang="hi">Aap har waqt paas nahi baith sakte.</h2>
+      <h2 data-lang="en">You can't sit beside them every moment.</h2>
+
+      <p data-lang="hi">Aur honestly — koi bhi nahi baith sakta. Life chalti rehti hai.</p>
+      <p data-lang="en">And honestly — no one can. Life goes on.</p>
+
       <div class="pain-grid">
-        <div class="pain-card"><span class="pain-icon">🔁</span> Roz roz check karna possible nahi hota</div>
-        <div class="pain-card"><span class="pain-icon">⏳</span> Har 10 minute me dekhna practical nahi</div>
-        <div class="pain-card"><span class="pain-icon">🤝</span> Trust karna chahte ho, par doubt aata hai</div>
-        <div class="pain-card"><span class="pain-icon">😮‍💨</span> Relationship pe bhi strain aata hai</div>
+        <div class="pain-card" data-lang="hi"><span class="pain-icon">🔁</span> Roz roz check karna possible nahi hota</div>
+        <div class="pain-card" data-lang="hi"><span class="pain-icon">⏳</span> Har 10 minute me dekhna practical nahi</div>
+        <div class="pain-card" data-lang="hi"><span class="pain-icon">🤝</span> Trust karna chahte ho, par doubt aata hai</div>
+        <div class="pain-card" data-lang="hi"><span class="pain-icon">😮‍💨</span> Relationship pe bhi strain aata hai</div>
+        <div class="pain-card" data-lang="en"><span class="pain-icon">🔁</span> Checking in constantly isn't possible</div>
+        <div class="pain-card" data-lang="en"><span class="pain-icon">⏳</span> Looking in every 10 minutes isn't practical</div>
+        <div class="pain-card" data-lang="en"><span class="pain-icon">🤝</span> You want to trust them, but doubt creeps in</div>
+        <div class="pain-card" data-lang="en"><span class="pain-icon">😮‍💨</span> It puts a strain on the relationship too</div>
       </div>
-      <p class="pain-note">Yeh monitoring ki problem hai. Motivation ki problem nahi.</p>
+
+      <p class="pain-note" data-lang="hi">Yeh monitoring ki problem hai. Motivation ki problem nahi.</p>
+      <p class="pain-note" data-lang="en">This is a monitoring problem. Not a motivation problem.</p>
     </div>
   </div>
 </section>
@@ -847,17 +497,28 @@
 <section id="whatif">
   <div class="container">
     <div class="section-block fade-up">
-      <div class="section-label">Ek Idea</div>
-      <h2>Hum ek simple idea explore kar rahe hain.</h2>
-      <p>Agar aisa system ho jo bina aapke interfere kiye:</p>
-      <ul class="whatif-list">
+      <div class="section-label" data-lang="hi">Ek Idea</div>
+      <div class="section-label" data-lang="en">One Idea</div>
+
+      <h2 data-lang="hi">Hum ek simple idea explore kar rahe hain.</h2>
+      <h2 data-lang="en">We're exploring a simple idea.</h2>
+
+      <p data-lang="hi">Agar aisa system ho jo bina aapke interfere kiye:</p>
+      <p data-lang="en">What if there was a system that, without any interference from you:</p>
+
+      <ul class="whatif-list" data-lang="hi">
         <li>Bata sake ki baccha table pe hai ya nahi</li>
         <li>Detect kare jab woh distracted ho</li>
         <li>Aapko clearly dikha de ki actual study kitni hui</li>
       </ul>
-      <div class="whatif-question">
-        Toh kya <span>yeh useful hoga?</span>
-      </div>
+      <ul class="whatif-list" data-lang="en">
+        <li>Could tell whether your child is at the desk or not</li>
+        <li>Detected when they got distracted</li>
+        <li>Clearly showed you how much real studying happened</li>
+      </ul>
+
+      <div class="whatif-question" data-lang="hi">Toh kya <span>yeh useful hoga?</span></div>
+      <div class="whatif-question" data-lang="en">Would <span>that be useful?</span></div>
     </div>
   </div>
 </section>
@@ -866,28 +527,47 @@
 <section id="viz">
   <div class="container">
     <div class="section-block fade-up">
-      <div class="section-label">Ek Normal Din</div>
-      <h2>Sochiye ek normal din ka scene.</h2>
+      <div class="section-label" data-lang="hi">Ek Normal Din</div>
+      <div class="section-label" data-lang="en">A Normal Day</div>
+
+      <h2 data-lang="hi">Sochiye ek normal din ka scene.</h2>
+      <h2 data-lang="en">Picture a normal evening.</h2>
+
       <div class="desk-viz">
-        <p class="desk-story">
+        <p class="desk-story" data-lang="hi">
           Shaam ka study time hai. Baccha desk pe baitha hai.<br>
           Table pe ek <strong>chhota sa device</strong> rakha hai — koi setup nahi, koi manual kaam nahi.<br>
           System khud observe karta hai, aap apna kaam karte rehte hain.
         </p>
-        <ul class="detect-items">
+        <p class="desk-story" data-lang="en">
+          It's evening study time. Your child is at the desk.<br>
+          A <strong>small device</strong> sits on the table — no setup, no manual work.<br>
+          The system observes on its own, while you go about your day.
+        </p>
+
+        <ul class="detect-items" data-lang="hi">
           <li><span class="detect-dot"></span> Baitha hai ya uth gaya</li>
           <li><span class="detect-dot"></span> Focused hai ya idhar-udhar dekh raha hai</li>
           <li><span class="detect-dot"></span> Beech me phone use ho raha hai ya nahi</li>
         </ul>
+        <ul class="detect-items" data-lang="en">
+          <li><span class="detect-dot"></span> Seated or stepped away</li>
+          <li><span class="detect-dot"></span> Focused or looking around</li>
+          <li><span class="detect-dot"></span> Whether the phone was picked up mid-session</li>
+        </ul>
+
         <div class="result-card">
           <span class="result-icon">📊</span>
           <div>
-            <div class="result-text">Aaj ka study summary</div>
-            <div class="result-value">"2 ghante baitha — 1 ghanta actual study"</div>
+            <div class="result-text" data-lang="hi">Aaj ka study summary</div>
+            <div class="result-text" data-lang="en">Today's study summary</div>
+            <div class="result-value" data-lang="hi">"2 ghante baitha — 1 ghanta actual study"</div>
+            <div class="result-value" data-lang="en">"Sat for 2 hours — 1 hour of actual study"</div>
           </div>
         </div>
       </div>
-      <p style="color:var(--muted); font-size:13px; text-align:center; margin-top:8px;">Bas itna hi. Simple. Clear. Honest.</p>
+      <p style="color:var(--muted); font-size:13px; text-align:center; margin-top:8px;" data-lang="hi">Bas itna hi. Simple. Clear. Honest.</p>
+      <p style="color:var(--muted); font-size:13px; text-align:center; margin-top:8px;" data-lang="en">That's it. Simple. Clear. Honest.</p>
     </div>
   </div>
 </section>
@@ -896,44 +576,64 @@
 <section id="session">
   <div class="container">
     <div class="section-block fade-up">
-      <div class="section-label">Kaise Kaam Karega</div>
-      <h2>Roz ka study session kaise chalega?</h2>
-      <p class="session-intro">Har din ka study time manually track karne ki zarurat nahi. System simple rakha hai:</p>
+      <div class="section-label" data-lang="hi">Kaise Kaam Karega</div>
+      <div class="section-label" data-lang="en">How It Works</div>
+
+      <h2 data-lang="hi">Roz ka study session kaise chalega?</h2>
+      <h2 data-lang="en">How does a daily study session work?</h2>
+
+      <p class="session-intro" data-lang="hi">Har din ka study time manually track karne ki zarurat nahi. System simple rakha hai:</p>
+      <p class="session-intro" data-lang="en">No need to manually track study time every day. The system is kept simple:</p>
+
       <div class="flow-steps">
         <div class="flow-step">
           <div class="flow-step-num">🪑</div>
           <div class="flow-step-body">
-            <strong>Baccha study table pe baithta hai</strong>
-            <span>Device uski presence detect karna shuru karta hai</span>
+            <strong data-lang="hi">Baccha study table pe baithta hai</strong>
+            <strong data-lang="en">Child sits at the study table</strong>
+            <span data-lang="hi">Device uski presence detect karna shuru karta hai</span>
+            <span data-lang="en">The device begins detecting their presence</span>
           </div>
         </div>
         <div class="flow-step">
           <div class="flow-step-num">▶️</div>
           <div class="flow-step-body">
-            <strong>Ek button dabaya — session start</strong>
-            <span>Koi complex setup nahi. Ek tap, aur system active</span>
+            <strong data-lang="hi">Ek button dabaya — session start</strong>
+            <strong data-lang="en">One button pressed — session starts</strong>
+            <span data-lang="hi">Koi complex setup nahi. Ek tap, aur system active</span>
+            <span data-lang="en">No complex setup. One tap and the system is live</span>
           </div>
         </div>
         <div class="flow-step">
           <div class="flow-step-num">⚠️</div>
           <div class="flow-step-body">
-            <strong>Beech me uthta hai ya focus break hota hai</strong>
-            <span>System detect karta hai → timer automatically pause</span>
+            <strong data-lang="hi">Beech me uthta hai ya focus break hota hai</strong>
+            <strong data-lang="en">They get up or their focus breaks</strong>
+            <span data-lang="hi">System detect karta hai → timer automatically pause</span>
+            <span data-lang="en">System detects it → timer automatically pauses</span>
           </div>
         </div>
         <div class="flow-step highlight">
           <div class="flow-step-num">✅</div>
           <div class="flow-step-body">
-            <strong>Wapas aaya, properly padh raha hai</strong>
-            <span>Tabhi — aur sirf tabhi — study time count hota hai</span>
+            <strong data-lang="hi">Wapas aaya, properly padh raha hai</strong>
+            <strong data-lang="en">Back at the desk, actually studying</strong>
+            <span data-lang="hi">Tabhi — aur sirf tabhi — study time count hota hai</span>
+            <span data-lang="en">Only then — and only then — does study time count</span>
           </div>
         </div>
       </div>
+
       <div class="session-key-point">
-        <div class="skp-label">Important Part</div>
-        <p class="skp-big">
+        <div class="skp-label" data-lang="hi">Important Part</div>
+        <div class="skp-label" data-lang="en">The Key Point</div>
+        <p class="skp-big" data-lang="hi">
           <span class="skp-strike">Sirf baithne ka time</span> count nahi hota.<br>
           <span class="skp-ok">Sirf actual padhai ka time</span> count hota hai.
+        </p>
+        <p class="skp-big" data-lang="en">
+          <span class="skp-strike">Time spent sitting</span> doesn't count.<br>
+          <span class="skp-ok">Only actual study time</span> counts.
         </p>
       </div>
     </div>
@@ -944,33 +644,58 @@
 <section id="appblock">
   <div class="container">
     <div class="section-block fade-up">
-      <div class="section-label">Control Layer</div>
-      <h2>Distraction sirf detect nahi — control bhi hoga.</h2>
-      <p>Sabse badi problem kya hoti hai?</p>
-      <div class="phone-callout">Phone.</div>
-      <p>Aur sirf dekhne se problem solve nahi hoti. Isliye system me ek aur layer ho sakti hai:</p>
-      <p style="font-weight:600; color:var(--ink); font-size:15.5px;">Study time ke dauraan distracting apps block ho sakte hain.</p>
-      <ul class="block-list" style="margin-top:20px;">
+      <div class="section-label" data-lang="hi">Control Layer</div>
+      <div class="section-label" data-lang="en">Control Layer</div>
+
+      <h2 data-lang="hi">Distraction sirf detect nahi — control bhi hoga.</h2>
+      <h2 data-lang="en">Distraction isn't just detected — it's controlled too.</h2>
+
+      <p data-lang="hi">Sabse badi problem kya hoti hai?</p>
+      <p data-lang="en">What's the biggest distraction?</p>
+
+      <div class="phone-callout" data-lang="hi">Phone.</div>
+      <div class="phone-callout" data-lang="en">The Phone.</div>
+
+      <p data-lang="hi">Aur sirf dekhne se problem solve nahi hoti. Isliye system me ek aur layer ho sakti hai:</p>
+      <p data-lang="en">And just watching doesn't solve the problem. So the system can have an additional layer:</p>
+
+      <p style="font-weight:600; color:var(--ink); font-size:15.5px;" data-lang="hi">Study time ke dauraan distracting apps block ho sakte hain.</p>
+      <p style="font-weight:600; color:var(--ink); font-size:15.5px;" data-lang="en">Distracting apps can be blocked during study time.</p>
+
+      <ul class="block-list" style="margin-top:20px;" data-lang="hi">
         <li class="blocked"><span class="bl-icon">🚫</span> Instagram, YouTube, games — temporarily block</li>
         <li class="allowed"><span class="bl-icon">✅</span> Sirf allowed apps chal sakte hain — notes, study apps</li>
       </ul>
+      <ul class="block-list" style="margin-top:20px;" data-lang="en">
+        <li class="blocked"><span class="bl-icon">🚫</span> Instagram, YouTube, games — temporarily blocked</li>
+        <li class="allowed"><span class="bl-icon">✅</span> Only allowed apps work — notes, study tools</li>
+      </ul>
+
       <div class="twist-box">
-        <div class="twist-label">Twist — Yeh Important Hai</div>
-        <h3>Apps time se nahi, study se unlock honge.</h3>
+        <div class="twist-label" data-lang="hi">Twist — Yeh Important Hai</div>
+        <div class="twist-label" data-lang="en">The Twist — This Matters</div>
+        <h3 data-lang="hi">Apps time se nahi, study se unlock honge.</h3>
+        <h3 data-lang="en">Apps unlock based on study — not just time.</h3>
         <div class="unlock-compare">
           <div class="unlock-card bad">
-            <div class="uc-type">Timer-based</div>
-            <div class="uc-desc">2 ghante baitha raho — chahe padho ya nahi</div>
+            <div class="uc-type" data-lang="hi">Timer-based</div>
+            <div class="uc-type" data-lang="en">Timer-based</div>
+            <div class="uc-desc" data-lang="hi">2 ghante baitha raho — chahe padho ya nahi</div>
+            <div class="uc-desc" data-lang="en">Sit for 2 hours — whether you study or not</div>
             <div class="uc-verdict">❌</div>
           </div>
           <div class="unlock-card good">
-            <div class="uc-type">Study-based</div>
-            <div class="uc-desc">2 ghante actual focused study — tabhi unlock</div>
+            <div class="uc-type" data-lang="hi">Study-based</div>
+            <div class="uc-type" data-lang="en">Study-based</div>
+            <div class="uc-desc" data-lang="hi">2 ghante actual focused study — tabhi unlock</div>
+            <div class="uc-desc" data-lang="en">2 hours of actual focused study — then it unlocks</div>
             <div class="uc-verdict">✅</div>
           </div>
         </div>
       </div>
-      <p class="reward-note">Shortcut nahi chalega. Sirf real effort ka reward milega.</p>
+
+      <p class="reward-note" data-lang="hi">Shortcut nahi chalega. Sirf real effort ka reward milega.</p>
+      <p class="reward-note" data-lang="en">No shortcuts. Only real effort gets rewarded.</p>
     </div>
   </div>
 </section>
@@ -979,50 +704,82 @@
 <section id="report">
   <div class="container">
     <div class="section-block fade-up">
-      <div class="section-label">Clarity</div>
-      <h2>Aapko exactly kya dikhega?</h2>
-      <p>System do level pe kaam karega:</p>
+      <div class="section-label" data-lang="hi">Clarity</div>
+      <div class="section-label" data-lang="en">Clarity</div>
+
+      <h2 data-lang="hi">Aapko exactly kya dikhega?</h2>
+      <h2 data-lang="en">What exactly will you see?</h2>
+
+      <p data-lang="hi">System do level pe kaam karega:</p>
+      <p data-lang="en">The system works on two levels:</p>
+
       <div class="dual-panel">
         <div class="panel hardware">
-          <div class="panel-label">Level 1 · Real-time</div>
-          <div class="panel-title">Hardware pe — study ke dauraan</div>
-          <ul class="panel-items">
+          <div class="panel-label" data-lang="hi">Level 1 · Real-time</div>
+          <div class="panel-label" data-lang="en">Level 1 · Real-time</div>
+          <div class="panel-title" data-lang="hi">Hardware pe — study ke dauraan</div>
+          <div class="panel-title" data-lang="en">On the device — during study</div>
+          <ul class="panel-items" data-lang="hi">
             <li>Device pe hi indication milega</li>
             <li>Distraction ho raha hai → turant signal</li>
             <li>Bacche ko khud pata chalega</li>
           </ul>
-          <div class="panel-for">Yeh bacche ke liye feedback hai. Parent ke liye nahi.</div>
+          <ul class="panel-items" data-lang="en">
+            <li>Indication shown on the device itself</li>
+            <li>Getting distracted → instant signal</li>
+            <li>The child knows immediately</li>
+          </ul>
+          <div class="panel-for" data-lang="hi">Yeh bacche ke liye feedback hai. Parent ke liye nahi.</div>
+          <div class="panel-for" data-lang="en">This feedback is for the child. Not the parent.</div>
         </div>
         <div class="panel parent-app">
-          <div class="panel-label">Level 2 · Daily Summary</div>
-          <div class="panel-title">Din ke end me parent ko simple report</div>
-          <ul class="panel-items">
+          <div class="panel-label" data-lang="hi">Level 2 · Daily Summary</div>
+          <div class="panel-label" data-lang="en">Level 2 · Daily Summary</div>
+          <div class="panel-title" data-lang="hi">Din ke end me parent ko simple report</div>
+          <div class="panel-title" data-lang="en">Simple report for parents at end of day</div>
+          <ul class="panel-items" data-lang="hi">
             <li>Total time baitha</li>
             <li>Actual focused study time</li>
             <li>Kitni baar distraction hua</li>
             <li>Consistency pattern over time</li>
           </ul>
-          <div class="panel-for">Aapke liye. Clear. No guessing.</div>
+          <ul class="panel-items" data-lang="en">
+            <li>Total time seated</li>
+            <li>Actual focused study time</li>
+            <li>Number of distraction events</li>
+            <li>Consistency patterns over time</li>
+          </ul>
+          <div class="panel-for" data-lang="hi">Aapke liye. Clear. No guessing.</div>
+          <div class="panel-for" data-lang="en">For you. Clear. No guessing.</div>
         </div>
       </div>
+
       <div class="report-mock">
-        <div class="rm-date">Aaj · Shaam 9:00 PM</div>
+        <div class="rm-date" data-lang="hi">Aaj · Shaam 9:00 PM</div>
+        <div class="rm-date" data-lang="en">Today · 9:00 PM</div>
         <div class="rm-row">
-          <span class="rm-key">Total time baitha</span>
-          <span class="rm-val">3.5 ghante</span>
+          <span class="rm-key" data-lang="hi">Total time baitha</span>
+          <span class="rm-key" data-lang="en">Total time seated</span>
+          <span class="rm-val">3.5 hrs</span>
         </div>
         <div class="rm-row">
-          <span class="rm-key">Actual focused study</span>
-          <span class="rm-val good">2.1 ghante</span>
+          <span class="rm-key" data-lang="hi">Actual focused study</span>
+          <span class="rm-key" data-lang="en">Actual focused study</span>
+          <span class="rm-val good">2.1 hrs</span>
         </div>
         <div class="rm-row">
-          <span class="rm-key">Distraction events</span>
-          <span class="rm-val warn">5 baar</span>
+          <span class="rm-key" data-lang="hi">Distraction events</span>
+          <span class="rm-key" data-lang="en">Distraction events</span>
+          <span class="rm-val warn">5 times</span>
         </div>
       </div>
+
       <div class="format-note">
-        <strong>Real-time feedback</strong> bacche ko correct karta hai.<br>
-        <strong>Daily summary</strong> parent ko clarity deta hai.
+        <strong data-lang="hi">Real-time feedback</strong><span data-lang="hi"> bacche ko correct karta hai.</span>
+        <strong data-lang="en">Real-time feedback</strong><span data-lang="en"> corrects the child in the moment.</span>
+        <br>
+        <strong data-lang="hi">Daily summary</strong><span data-lang="hi"> parent ko clarity deta hai.</span>
+        <strong data-lang="en">Daily summary</strong><span data-lang="en"> gives parents complete clarity.</span>
       </div>
     </div>
   </div>
@@ -1032,27 +789,44 @@
 <section id="matters">
   <div class="container">
     <div class="section-block fade-up">
-      <div class="section-label">Kya Badlega</div>
-      <h2>Abhi jo hota hai, aur jo ho sakta hai.</h2>
+      <div class="section-label" data-lang="hi">Kya Badlega</div>
+      <div class="section-label" data-lang="en">What Changes</div>
+
+      <h2 data-lang="hi">Abhi jo hota hai, aur jo ho sakta hai.</h2>
+      <h2 data-lang="en">What happens now, vs. what could happen.</h2>
+
       <div class="compare-grid">
         <div class="compare-col before">
-          <h4>Abhi</h4>
-          <ul>
+          <h4 data-lang="hi">Abhi</h4>
+          <h4 data-lang="en">Right Now</h4>
+          <ul data-lang="hi">
             <li>"Kitna padha?" → guess</li>
             <li>"Focus tha?" → guess</li>
             <li>"Improve ho raha hai?" → guess</li>
           </ul>
+          <ul data-lang="en">
+            <li>"How much did you study?" → guess</li>
+            <li>"Were you focused?" → guess</li>
+            <li>"Are you improving?" → guess</li>
+          </ul>
         </div>
         <div class="compare-col after">
-          <h4>Agar Yeh Ho</h4>
-          <ul>
+          <h4 data-lang="hi">Agar Yeh Ho</h4>
+          <h4 data-lang="en">With This</h4>
+          <ul data-lang="hi">
             <li>Clear numbers</li>
             <li>Clear pattern</li>
             <li>Clear problem areas</li>
           </ul>
+          <ul data-lang="en">
+            <li>Clear numbers</li>
+            <li>Clear patterns</li>
+            <li>Clear problem areas</li>
+          </ul>
         </div>
       </div>
-      <p>Discussion assumptions pe nahi, reality pe hota hai. Bacche se baat bhi zyaada constructive hoti hai.</p>
+      <p data-lang="hi">Discussion assumptions pe nahi, reality pe hota hai. Bacche se baat bhi zyaada constructive hoti hai.</p>
+      <p data-lang="en">Conversations happen based on reality, not assumptions. Talking to your child becomes far more constructive.</p>
     </div>
   </div>
 </section>
@@ -1061,13 +835,19 @@
 <section id="clarity">
   <div class="container">
     <div class="section-block fade-up">
-      <div class="section-label">Seedhi Baat</div>
+      <div class="section-label" data-lang="hi">Seedhi Baat</div>
+      <div class="section-label" data-lang="en">Straight Talk</div>
+
       <div class="clarity-box">
         <div class="clarity-icon">🔧</div>
-        <h3>Yeh product abhi exist nahi karta.</h3>
-        <p>Hum bas yeh samajhna chahte hain:<br>
+        <h3 data-lang="hi">Yeh product abhi exist nahi karta.</h3>
+        <h3 data-lang="en">This product doesn't exist yet.</h3>
+        <p data-lang="hi">Hum bas yeh samajhna chahte hain:<br>
         Kya yeh problem real hai? Aur kya log is type ka solution chahenge?<br><br>
         Aapka 2-minute ka honest input hi decide karega ki isko banana chahiye ya nahi.</p>
+        <p data-lang="en">We simply want to understand:<br>
+        Is this problem real? And would people actually want a solution like this?<br><br>
+        Your 2-minute honest input is what will decide whether this should be built.</p>
       </div>
     </div>
   </div>
@@ -1077,30 +857,46 @@
 <section id="trust">
   <div class="container">
     <div class="section-block fade-up">
-      <div class="section-label">Ek Honest Sawal</div>
-      <h2>Agar camera use ho — par koi recording na ho?</h2>
-      <p>System detection ke liye camera use kare, lekin:</p>
+      <div class="section-label" data-lang="hi">Ek Honest Sawal</div>
+      <div class="section-label" data-lang="en">An Honest Question</div>
+
+      <h2 data-lang="hi">Agar camera use ho — par koi recording na ho?</h2>
+      <h2 data-lang="en">What if a camera is used — but nothing is recorded?</h2>
+
+      <p data-lang="hi">System detection ke liye camera use kare, lekin:</p>
+      <p data-lang="en">The system uses a camera for detection, but:</p>
+
       <div class="trust-diagram">
         <div class="trust-node">
           <span class="ticon">📷</span>
-          <div class="tlabel">Camera</div>
-          <div class="tsub">Sirf dekhe</div>
+          <div class="tlabel" data-lang="hi">Camera</div>
+          <div class="tlabel" data-lang="en">Camera</div>
+          <div class="tsub" data-lang="hi">Sirf dekhe</div>
+          <div class="tsub" data-lang="en">Only observes</div>
         </div>
         <div class="trust-arrow">→</div>
         <div class="trust-node deny">
           <span class="ticon">🚫</span>
-          <div class="tlabel">No Recording</div>
-          <div class="tsub">Koi save nahi</div>
+          <div class="tlabel" data-lang="hi">No Recording</div>
+          <div class="tlabel" data-lang="en">No Recording</div>
+          <div class="tsub" data-lang="hi">Koi save nahi</div>
+          <div class="tsub" data-lang="en">Nothing saved</div>
         </div>
         <div class="trust-arrow">→</div>
         <div class="trust-node">
           <span class="ticon">✅</span>
-          <div class="tlabel">Sirf Detection</div>
-          <div class="tsub">Baitha / Nahi</div>
+          <div class="tlabel" data-lang="hi">Sirf Detection</div>
+          <div class="tlabel" data-lang="en">Only Detection</div>
+          <div class="tsub" data-lang="hi">Baitha / Nahi</div>
+          <div class="tsub" data-lang="en">Present / Not</div>
         </div>
       </div>
-      <p class="trust-note">Koi video nahi. Koi photo nahi. Sirf real-time presence detect hoti hai.</p>
-      <p style="margin-top:20px;">Toh aap <strong>comfortable honge?</strong> Yeh bhi hum samajhna chahte hain — kyunki privacy trust se zyaada important hai.</p>
+
+      <p class="trust-note" data-lang="hi">Koi video nahi. Koi photo nahi. Sirf real-time presence detect hoti hai.</p>
+      <p class="trust-note" data-lang="en">No video. No photos. Only real-time presence detection.</p>
+
+      <p style="margin-top:20px;" data-lang="hi">Toh aap <strong>comfortable honge?</strong> Yeh bhi hum samajhna chahte hain — kyunki privacy trust se zyaada important hai.</p>
+      <p style="margin-top:20px;" data-lang="en">Would you be <strong>comfortable with that?</strong> We genuinely want to know — because privacy matters more than trust.</p>
     </div>
   </div>
 </section>
@@ -1108,32 +904,50 @@
 <!-- ─── CLOSING ─── -->
 <section id="closing">
   <div class="container">
-    <h2>Agar aapko yeh problem real lagti hai —<br>toh aapka input kaafi valuable hoga.</h2>
-    <p>Koi sales nahi. Koi spam nahi. Bas honest feedback chahiye.</p>
+    <h2 data-lang="hi">Agar aapko yeh problem real lagti hai —<br>toh aapka input kaafi valuable hoga.</h2>
+    <h2 data-lang="en">If this problem feels real to you —<br>your input would be incredibly valuable.</h2>
+
+    <p data-lang="hi">Koi sales nahi. Koi spam nahi. Bas honest feedback chahiye.</p>
+    <p data-lang="en">No sales. No spam. Just honest feedback.</p>
+
     <div class="cta-final-group">
-      <a href="form.html" class="cta-btn-large">Apni opinion share karein →</a>
-      <span class="cta-final-note">Aapke answers decide karenge ki yeh banana chahiye ya nahi.</span>
+      <a href="form.html" class="cta-btn-large" data-lang="hi">Apni opinion share karein →</a>
+      <a href="form.html" class="cta-btn-large" data-lang="en">Share your opinion →</a>
+      <span class="cta-final-note" data-lang="hi">Aapke answers decide karenge ki yeh banana chahiye ya nahi.</span>
+      <span class="cta-final-note" data-lang="en">Your answers will decide whether this should be built.</span>
     </div>
   </div>
 </section>
 
 <footer>
-  <p>© 2025 · Yeh sirf ek idea validation page hai. Abhi koi product nahi hai.</p>
+  <p data-lang="hi">© 2025 · Yeh sirf ek idea validation page hai. Abhi koi product nahi hai.</p>
+  <p data-lang="en">© 2025 · This is only an idea validation page. No product exists yet.</p>
 </footer>
 
 <script>
-  // Progress bar
   window.addEventListener('scroll', () => {
     const d = document.documentElement;
     const pct = (d.scrollTop / (d.scrollHeight - d.clientHeight)) * 100;
     document.getElementById('progress').style.width = pct + '%';
   });
 
-  // Fade-up on scroll
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
   }, { threshold: 0.12 });
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  function setLang(lang) {
+    document.body.className = 'lang-' + lang;
+    document.querySelectorAll('#lang-toggle button').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent.trim() === (lang === 'hi' ? 'हिंदी' : 'EN'));
+    });
+    document.documentElement.lang = lang;
+    localStorage.setItem('preferred-lang', lang);
+  }
+
+  // Restore preference across pages
+  const saved = localStorage.getItem('preferred-lang');
+  if (saved) setLang(saved);
 </script>
 </body>
 </html>
